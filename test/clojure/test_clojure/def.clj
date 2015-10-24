@@ -71,6 +71,7 @@
     (is (= :b
           (eval
             '(do
+               (clojure.core/require '[gumshoe.track :refer (deft)])
                (defmacro my-macro [] :a)
                (deft do-macro [] (my-macro))
                (defmacro my-macro [] :b)
