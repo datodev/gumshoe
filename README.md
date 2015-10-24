@@ -51,6 +51,12 @@ user> -recur-example-x
 0 ;; returns 0 because the value gets redefined on each trip through the function
 ```
 
+## TODO
+
+1. Add motivation to the about section on the README
+2. Turn on tracking for all functions in a namespace
+3. Update trackers when functions are redefined, similar to ring's reload middleware
+
 ## License
 
 Distributed under the Eclipse Public License either version 1.0 or (at
