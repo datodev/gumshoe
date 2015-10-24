@@ -52,9 +52,6 @@
                :let [sym (symbol (str "-" base-name "-" k))]]
            `(intern *ns* '~sym ~k)))))
 
-(defmacro test-locals [a b c]
-  (def-locals "hello"))
-
 (defn deft [&form &env name & fdecl]
   ;; Note: Cannot delegate this check to def because of the call to (with-meta name ..)
   (if (instance? clojure.lang.Symbol name)
