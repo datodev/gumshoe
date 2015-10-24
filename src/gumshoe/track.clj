@@ -56,7 +56,7 @@
   ;; Note: Cannot delegate this check to def because of the call to (with-meta name ..)
   (if (instance? clojure.lang.Symbol name)
     nil
-    (throw (IllegalArgumentException. "First argument to defn must be a symbol")))
+    (throw (IllegalArgumentException. "First argument to deft must be a symbol")))
   (let [m (if (string? (first fdecl))
             {:doc (first fdecl)}
             {})
