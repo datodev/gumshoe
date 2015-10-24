@@ -50,7 +50,8 @@
        ~@(for [k (keys env#)
                :when (not (contains? #{'&env '&form} k))
                :let [sym (symbol (str "-" base-name "-" k))]]
-           `(intern *ns* '~sym ~k)))))
+           `(intern *ns* '~sym ~k))
+       nil)))
 
 (defn deft [&form &env name & fdecl]
   ;; Note: Cannot delegate this check to def because of the call to (with-meta name ..)
