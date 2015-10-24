@@ -33,6 +33,7 @@
   `(binding [*ns* *ns*]
      (in-ns (gensym))
      (clojure.core/use 'clojure.core)
+     (clojure.core/use 'gumshoe.track)
      (eval
       '(do ~@forms))))
 
