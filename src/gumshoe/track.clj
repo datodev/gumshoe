@@ -49,7 +49,8 @@
     `(do
        ~@(for [k (keys env#)
                :when (not (contains? #{'&env '&form} k))
-               :let [sym (symbol (str "-" base-name "-" k))]]
+               :let [k (with-meta k (dissoc (meta k) :tag)) ;; prevent type hint for primitive local error
+                     sym (symbol (str "-" base-name "-" k))]]
            `(intern *ns* '~sym ~k))
        nil)))
 
