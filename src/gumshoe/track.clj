@@ -105,8 +105,19 @@
                                        (list `(def-locals ~base-ns ~name))
                                        (rest decl)))))))
 
+(def deft-non-macro (deref (var deft)))
+
 (. (var deft) (setMacro))
 
+(defonce defn-orig (deref (var defn)))
+
+(defn deft-everything []
+  (intern 'clojure.core 'defn deft-non-macro)
+  (. (var defn) (setMacro)))
+
+(defn undeft-everything []
+  (intern 'clojure.core 'defn defn-orig)
+  (. (var defn) (setMacro)))
 ;; TODO: finish porting over tools.trace stuff for tracking an entire namespace
 
 ;; (defn track-var*
