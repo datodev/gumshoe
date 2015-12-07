@@ -99,11 +99,18 @@
           ;;(cons `fn fdecl)
           (concat (list `fn) (for [decl fdecl
                                    :let [args (first decl)
-                                         body (rest decl)]]
+                                         pre-post ()
+                                         body (rest decl)
+                                         ;; pre/post conditions
+                                         conds (when (and (next body) (map? (first body)))
+                                                 (first body))]]
                                (concat (list args)
+                                       (list conds)
                                        ;; tracker
                                        (list `(def-locals ~base-ns ~name))
-                                       (rest decl)))))))
+                                       (if conds
+                                         (next body)
+                                         body)))))))
 
 (def deft-non-macro (deref (var deft)))
 
