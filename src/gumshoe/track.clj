@@ -44,14 +44,14 @@
           (seq ret)))
       (list (asig fdecl)))))
 
-(defmacro def-locals [base-name]
+(defmacro def-locals [base-ns base-name]
   (let [env# &env]
     `(do
        ~@(for [k (keys env#)
                :when (not (contains? #{'&env '&form} k))
                :let [k (with-meta k (dissoc (meta k) :tag)) ;; prevent type hint for primitive local error
                      sym (symbol (str "-" base-name "-" k))]]
-           `(intern *ns* '~sym ~k))
+           `(intern '~base-ns '~sym ~k))
        nil)))
 
 (defn deft [&form &env name & fdecl]
@@ -91,7 +91,8 @@
               (assoc m :inline (cons ifn (cons (clojure.lang.Symbol/intern (.concat (.getName ^clojure.lang.Symbol name) "__inliner"))
                                                (next inline))))
               m))
-        m (conj (if (meta name) (meta name) {}) m)]
+        m (conj (if (meta name) (meta name) {}) m)
+        base-ns *ns*]
     (list 'def (with-meta name m)
           ;;todo - restore propagation of fn name
           ;;must figure out how to convey primitive hints to self calls first
@@ -101,7 +102,7 @@
                                          body (rest decl)]]
                                (concat (list args)
                                        ;; tracker
-                                       (list `(def-locals ~name))
+                                       (list `(def-locals ~base-ns ~name))
                                        (rest decl)))))))
 
 (. (var deft) (setMacro))
