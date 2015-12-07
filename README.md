@@ -51,6 +51,19 @@ user> -recur-example-x
 0 ;; returns 0 because the value gets redefined on each trip through the function
 ```
 
+## Testing and development
+
+If you want to make changes and have a place to test them out, there is an
+example service in the dev directory. To start it, run:
+
+```
+lein with-profile dev run -m gumshoe.dev
+```
+
+Then connect to the repl on port 3005 and open your browser to http://localhost:4579
+
+The ports are configurable with `NREPL_PORT` and `HTTP_PORT`.
+
 ## TODO
 
 1. Add motivation to the about section on the README
