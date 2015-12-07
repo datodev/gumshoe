@@ -1,4 +1,4 @@
-(defproject dato/gumshoe "0.1.0"
+(defproject dato/gumshoe "0.1.1"
   :description "Debugging tool for tracking arguments passed to Clojure functions"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
