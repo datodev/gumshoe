@@ -7,7 +7,7 @@ A debugging tool for tracking arguments passed to Clojure functions.
 In your project.clj:
 
 ```
-[dato/gumshoe "0.1.2"]
+[dato/gumshoe "0.1.3"]
 ```
 
 Use `deft` in place of `defn` to have the arguments to the function defined in the namespace.
