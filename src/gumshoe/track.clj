@@ -51,7 +51,7 @@
                :when (not (contains? #{'&env '&form} k))
                :let [k (with-meta k (dissoc (meta k) :tag)) ;; prevent type hint for primitive local error
                      sym (symbol (str "-" base-name "-" k))]]
-           `(intern '~base-ns '~sym ~k))
+           (list 'def sym k))
        nil)))
 
 (defn deft [&form &env name & fdecl]
@@ -99,13 +99,13 @@
           ;;(cons `fn fdecl)
           (concat (list `fn) (for [decl fdecl
                                    :let [args (first decl)
-                                         pre-post ()
                                          body (rest decl)
                                          ;; pre/post conditions
                                          conds (when (and (next body) (map? (first body)))
-                                                 (first body))]]
+                                                 (list (first body)))
+                                         ]]
                                (concat (list args)
-                                       (list conds)
+                                       conds
                                        ;; tracker
                                        (list `(def-locals ~base-ns ~name))
                                        (if conds
