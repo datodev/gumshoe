@@ -7,7 +7,7 @@ A debugging tool for tracking arguments passed to Clojure functions.
 In your project.clj:
 
 ```
-[dato/gumshoe "0.1.3"]
+[dato/gumshoe "0.1.4"]
 ```
 
 Use `deft` in place of `defn` to have the arguments to the function defined in the namespace.
@@ -50,6 +50,17 @@ user> (recur-example 10)
 user> -recur-example-x
 0 ;; returns 0 because the value gets redefined on each trip through the function
 ```
+
+## Automatically using deft in development
+
+Gumshoe ships with a plugin that will replace clojure's `defn` with Gumshoe's `deft`. With the plugin, you'll automatically get tracking for every function in your project!
+
+Either in your project's `project.clj` file or in the `:user` profile in `~/.lein/profiles.clj`
+
+```
+:plugins [[dato/gumshoe "0.1.4"]]
+```
+
 
 ## Testing and development
 
