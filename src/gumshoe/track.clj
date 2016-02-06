@@ -49,8 +49,10 @@
     `(do
        ~@(for [k (keys env#)
                :when (not (contains? #{'&env '&form} k))
+
                :let [k (with-meta k (dissoc (meta k) :tag)) ;; prevent type hint for primitive local error
-                     sym (symbol (str "-" base-name "-" k))]]
+                     ;; use name to prevent def-ing fully qualified names
+                     sym (symbol (str "-" (name base-name) "-" k))]]
            (list 'def sym k))
        nil)))
 
