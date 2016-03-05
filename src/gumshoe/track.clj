@@ -49,10 +49,14 @@
     `(do
        ~@(for [k (keys env#)
                :when (not (contains? #{'&env '&form} k))
-
-               :let [k (with-meta k (dissoc (meta k) :tag)) ;; prevent type hint for primitive local error
+               :let [;; remove tag to prevent type hint for primitive local error
+                     k (with-meta k (dissoc (meta k) :tag))
                      ;; use name to prevent def-ing fully qualified names
-                     sym (symbol (str "-" (name base-name) "-" k))]]
+                     base (-> base-name
+                              name
+                              ;; don't let clojure think this is a namespace separator
+                              (.replace "/" "divide"))
+                     sym (symbol (str "-" base "-" k))]]
            (list 'def sym k))
        nil)))
 

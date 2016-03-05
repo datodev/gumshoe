@@ -3,7 +3,7 @@
             [leiningen.core.main :as lein]))
 
 ;; TODO: better way to handle this
-(def VERSION "0.1.4")
+(def VERSION "0.1.5")
 
 (defn middleware
   [{:keys [dependencies] :as project}]

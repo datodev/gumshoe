@@ -7,7 +7,7 @@ A debugging tool for tracking arguments passed to Clojure functions.
 In your project.clj:
 
 ```
-[dato/gumshoe "0.1.4"]
+[dato/gumshoe "0.1.5"]
 ```
 
 Use `deft` in place of `defn` to have the arguments to the function defined in the namespace.
@@ -58,9 +58,21 @@ Gumshoe ships with a plugin that will replace clojure's `defn` with Gumshoe's `d
 Either in your project's `project.clj` file or in the `:user` profile in `~/.lein/profiles.clj`
 
 ```
-:plugins [[dato/gumshoe "0.1.4"]]
+:plugins [[dato/gumshoe "0.1.5"]]
 ```
 
+Putting gumshoe in your user profile is handy, but it's safer to create a separate profile just for gumshoe:
+
+```
+{:gumshoe {:plugins [[dato/gumshoe "0.1.5"]]}
+ :user {:plugins ...}}
+```
+
+Then use with-profile in lein to use gumshoe only in dev:
+
+```
+lein with-profile +gumshoe run
+```
 
 ## Testing and development
 
