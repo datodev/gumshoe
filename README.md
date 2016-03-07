@@ -2,6 +2,8 @@
 
 A debugging tool for tracking arguments passed to Clojure functions.
 
+"Extremism in the defense of debugging is no vice!"
+
 ## Usage
 
 In your project.clj:

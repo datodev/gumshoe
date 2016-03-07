@@ -124,7 +124,10 @@
 
 (defonce defn-orig (deref (var defn)))
 
-(defn deft-everything []
+(defn deft-everything
+  "Redefines `defn` `deft`. All defns after this is run will use deft
+  \"Extremism in the defense of debugging is no vice!\""
+  []
   (intern 'clojure.core 'defn deft-non-macro)
   (. (var defn) (setMacro)))
 
